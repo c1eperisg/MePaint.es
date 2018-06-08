@@ -1,0 +1,43 @@
+.search-results{
+	border-bottom: 2px solid white; 
+	padding: 15px 0px 15px 0px; 
+	cursor:pointer; 
+	color: #3C8DBC;
+}
+
+.search-results .description{
+	font-size: 22px;
+	color: white;
+}
+
+.search-results-post{
+	border-bottom: 2px solid black; 
+	padding: 15px 0px 15px 0px; 
+	cursor:pointer; 
+	color: #3C8DBC;
+}
+
+.search-results-post .description{
+	font-size: 22px;
+	color: black;
+}
+
+.search-results:hover .description, .search-results-post:hover .description{
+	color: deepskyblue;
+}
+
+.search-results:hover, .search-results-post:hover {
+	border-bottom-color: deepskyblue;
+}
+
+.search-results:hover img, .search-results-post:hover img{
+	border: 1px solid deepskyblue;
+}
+
+.red-text{
+	color: red;
+}
+
+.cursor-point{
+	cursor: pointer;
+}
