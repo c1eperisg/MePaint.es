@@ -15,9 +15,8 @@ if(!isset($_SESSION['usuario']))
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>EDITAR MI PERFIL</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -30,7 +29,8 @@ if(!isset($_SESSION['usuario']))
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <!-- fav icon -->
   <link rel="icon" type="image/gif" href="images/fav_icon.png" />
-
+  <!-- Despliegue el minimenú -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -39,15 +39,11 @@ if(!isset($_SESSION['usuario']))
 <!-- START HEADER -->
 <header class="main-header">
 
-    <!-- Logo -->
     <a href="index.php" class="logo">
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">ME<b>PAINT</b></span>
     </a>
 
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
@@ -57,7 +53,6 @@ if(!isset($_SESSION['usuario']))
           $cuantas = mysqli_num_rows($noti);
           ?>
 
-          <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -66,7 +61,6 @@ if(!isset($_SESSION['usuario']))
             <ul class="dropdown-menu">
               <li class="header">Tienes <?php echo $cuantas; ?> notificaciones</li>
               <li>
-                <!-- inner menu: contains the actual data -->
                 <ul class="menu">
 
                 <?php                
@@ -81,8 +75,9 @@ if(!isset($_SESSION['usuario']))
                     <?php if ($no['tipo'] == 'quiere ser tu amigo') { ?>
                         <i class="fa fa-users text-aqua"></i> <?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
                    <?php } else { ?>
-                    <span onclick="location.href='perfil.php?id=<?php echo $_SESSION['id'];?>&perfil=etiquetado';">
+                     <a href="check.php?id=<?php echo $usa['id_user']; ?>">
                       <i class="fa fa-users text-aqua"></i><?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
+                    </a>
                     </span>
                   <?php } ?>
                   </center>
@@ -96,7 +91,6 @@ if(!isset($_SESSION['usuario']))
             </ul>
           </li>
 
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="avatars/<?php echo $_SESSION['avatar']; ?>" class="user-image" alt="User Image">
@@ -130,12 +124,9 @@ if(!isset($_SESSION['usuario']))
   </header>
 <!-- END HEADER -->
 
-<!-- START LEFT SIDE -->
-<!-- Left side column. contains the logo and sidebar -->
+<!-- SIDE BAR -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="color: white;">
-      <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left">
           <img src="avatars/<?php echo $_SESSION['avatar']; ?>" width="50" alt="User Image">
@@ -202,7 +193,6 @@ if(!isset($_SESSION['usuario']))
 
         ?>
     </section>
-    <!-- /.sidebar -->
   </aside>
 <!-- END LEFT SIDE -->
 
@@ -220,28 +210,17 @@ if($_SESSION['id'] != $id) {
 <?php
 }
 ?>
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-    <!-- Main content -->
     <section class="content">
 
-      
-      <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
         <div class="col-md-8">
-          <!-- /.box -->
 
-
-
-          <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Editar mi perfil</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
             <form role="form" method="post" action="" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
@@ -266,16 +245,13 @@ if($_SESSION['id'] != $id) {
                     <input type="radio" value="M" name="sexo" <?php if($use['sexo'] == 'M') { echo 'checked'; } ?>> Mujer
                   </label>
                 </div>
-              <!-- /.form group -->
               </div>
-              <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" name="actualizar" class="btn btn-primary">Actualizar datos</button>
               </div>
             </form>
           </div>
-          <!-- /.box -->
 
           <?php
           if(isset($_POST['actualizar']))
@@ -304,6 +280,11 @@ if($_SESSION['id'] != $id) {
             }
 
             $sql = mysqli_query($connect, "UPDATE usuarios SET nombre = '$nombre', usuario = '$usuario', email = '$email', sexo = '$sexo', avatar = '$nombrea' WHERE id_user = '$id'");
+            $recarga = mysqli_query($connect, "SELECT * FROM usuarios WHERE id_user = '$id'");
+            $rec=mysqli_fetch_array($recarga);
+             $_SESSION['nombre'] = $rec['nombre'];
+            $_SESSION['avatar'] = $rec['avatar'];
+            $_SESSION['usuario'] = $rec['usuario'];
 
             if($sql) {echo "<script type='text/javascript'>window.location='editarperfil.php?id=$_SESSION[id]';</script>";}
 
@@ -316,30 +297,19 @@ if($_SESSION['id'] != $id) {
         </div>      
 
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 
 </div>
-<!-- ./wrapper -->
-<!-- jQuery 2.2.3 -->
+
+<!-- jQuery -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
+<!-- Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
-<script>
-  $(function () {
-    $("[data-mask]").inputmask();
-  });
-</script>
+
 </body>
 </html>
 <?php } ?>

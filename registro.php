@@ -15,7 +15,6 @@ if(isset($_SESSION['usuario']))
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php ?> Registro</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -34,6 +33,7 @@ if(isset($_SESSION['usuario']))
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
+    <img src="images/fav_icon.png" alt="Logo MePaint" height="50" width="50">
     <a href="">ME<b>PAINT</b></a>
   </div>
 
@@ -62,11 +62,9 @@ if(isset($_SESSION['usuario']))
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">
-        <!-- /.col -->
         <div class="col-xs-12">
           <button type="submit" name="registrar" class="btn btn-primary btn-block btn-flat">Registrarme</button>
         </div>
-        <!-- /.col -->
       </div>
     </form>
 
@@ -144,22 +142,12 @@ if(isset($_SESSION['usuario']))
     <br>
     <a href="login.php" class="text-center">Tengo actualmente una cuenta</a>
   </div>
-  <!-- /.form-box -->
 </div>
-<!-- /.register-box -->
 
-<!-- jQuery 2.2.3 -->
+<!-- jQuery -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+
 </body>
 </html>

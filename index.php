@@ -20,9 +20,8 @@ if(!isset($_SESSION['usuario']))
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ME PAINT</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -39,9 +38,8 @@ if(!isset($_SESSION['usuario']))
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <!-- fav icon -->
   <link rel="icon" type="image/gif" href="images/fav_icon.png" />
-  <!-- codigo scroll -->
+  <!-- Despliegue el minimenú -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="js/jquery.jscroll.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -51,11 +49,9 @@ if(!isset($_SESSION['usuario']))
 
     <!-- Logo -->
     <a href="index.php" class="logo">
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">ME<b>PAINT</b></span>
     </a>
 
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -67,7 +63,6 @@ if(!isset($_SESSION['usuario']))
           $cuantas = mysqli_num_rows($noti);
           ?>
 
-          <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -76,7 +71,6 @@ if(!isset($_SESSION['usuario']))
             <ul class="dropdown-menu">
               <li class="header">Tienes <?php echo $cuantas; ?> notificaciones</li>
               <li>
-                <!-- inner menu: contains the actual data -->
                 <ul class="menu">
 
                 <?php                
@@ -91,7 +85,7 @@ if(!isset($_SESSION['usuario']))
                     <?php if ($no['tipo'] == 'quiere ser tu amigo') { ?>
                         <i class="fa fa-users text-aqua"></i> <?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
                    <?php } else { ?>
-                     <a href="check.php?id=<?php $usa['user_id']; ?>">
+                     <a href="check.php?id=<?php echo $usa['id_user']; ?>">
                       <i class="fa fa-users text-aqua"></i><?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
                     </a>
                     </span>
@@ -107,7 +101,6 @@ if(!isset($_SESSION['usuario']))
             </ul>
           </li>
 
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="avatars/<?php echo $_SESSION['avatar']; ?>" class="user-image" alt="User Image">
@@ -141,12 +134,9 @@ if(!isset($_SESSION['usuario']))
   </header>
 <!-- END HEADER -->
 
-<!-- START LEFT SIDE -->
-<!-- Left side column. contains the logo and sidebar -->
+<!-- LEFT SIDE -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="color: white;">
-      <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left">
           <img src="avatars/<?php echo $_SESSION['avatar']; ?>" width="50" alt="User Image">
@@ -213,17 +203,13 @@ if(!isset($_SESSION['usuario']))
 
         ?>
     </section>
-    <!-- /.sidebar -->
   </aside>
 <!-- END LEFT SIDE -->
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-    <!-- Main content -->
     <section class="content">
 
-    <!-- Script validar caracteres -->
     <script type="text/javascript">    
     function validarn(e) {
     tecla = (document.all) ? e.keyCode : e.which;
@@ -236,14 +222,9 @@ if(!isset($_SESSION['usuario']))
     return patron.test(te);
 } 
     </script>
-    <!-- Script validar caracteres -->
 
-      
-      <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
         <div class="col-md-8">
-          <!-- /.box -->
           <div class="row">
 
             
@@ -259,7 +240,6 @@ if(!isset($_SESSION['usuario']))
                     </button>
               </div>
 
-              <!-- /.box-body -->
                 <div class="box-footer">
 
                   <form style="margin-bottom: 10px;" action="" method="post" enctype="multipart/form-data">
@@ -270,6 +250,7 @@ if(!isset($_SESSION['usuario']))
                             </button>
                           </span>
                     </div>
+                    <center class='red-text'>Recuerda! Primero busca a tu amigo, luego sube el texto y la imagen!</center>
 
                   </form>
                   <form action="" method="post" enctype="multipart/form-data">
@@ -277,13 +258,10 @@ if(!isset($_SESSION['usuario']))
                       <textarea name="publicacion" onkeypress="return validarn(event)" placeholder="¿Qué quieres compartir?" class="form-control" cols="200" rows="3" required></textarea>
                       <br><br><br><br>
                       
-                    <!-- START Input file nuevo diseño .-->
                       <input type="file" name="foto" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected"/>
-
-                      <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Sube una foto</span></label>
+                      <!-- ocultamos el id del ususario seleccionado -->
                       <input style="display: none;" type="text" name="idEleg" id="idElegido" value="" required>
                       
-                    <!-- END Input file nuevo diseño .-->
                     <br>
 
                       <button type="submit" name="publicar" class="btn btn-primary btn-flat">Publicar</button>
@@ -294,8 +272,6 @@ if(!isset($_SESSION['usuario']))
                       $nomUser = mysqli_real_escape_string($connect, $_POST['buscarUsuarioEtiquetar']);
 
                       if ($nomUser!= "") {
-
-                         //$amigos = mysql_query("SELECT * FROM amigos WHERE de = '$id' AND para = '".$_SESSION['id']."' OR de = '".$_SESSION['id']."' AND para = '$id'");
 
                               $busqueda = mysqli_query($connect, "SELECT usuarios.* FROM usuarios, amigos WHERE (amigos.de = usuarios.id_user AND amigos.para = '".$_SESSION['id']."' AND amigos.estado = 1 AND usuarios.nombre LIKE '%{$nomUser}%' AND usuarios.id_user != '".$_SESSION['id']."') OR (amigos.para = usuarios.id_user AND amigos.de = '".$_SESSION['id']."' AND amigos.estado = 1 AND usuarios.nombre LIKE '%{$nomUser}%' AND usuarios.id_user != '".$_SESSION['id']."')");
 
@@ -380,37 +356,15 @@ if(!isset($_SESSION['usuario']))
                   }      
                   ?>           
                 </div>
-                <!-- /.box-footer-->
               </div>
-              <!--/.direct-chat -->
-            </div>
-            <!-- /.col -->            
+            </div>       
           </div>
-          <!-- /.row -->
-
-
-          <!-- codigo scroll -->
-          <div class="scroll">
-            <?php require_once 'publicaciones.php'; ?>
-          </div>
-
-            <script>
-            //Simple codigo para hacer la paginacion scroll
-            $(document).ready(function() {
-              $('.scroll').jscroll({
-                loadingHtml: '<img src="images/invisible.png" alt="Loading" />'
-            });
-            });
-            </script>
-          <!-- codigo scroll -->
-
 
         </div>
 
         <div class="col-md-4">          
 
-          <!-- PRODUCT LIST -->
-          <?php $amistade = mysqli_query($connect, "SELECT * FROM amigos WHERE para = '".$_SESSION['id']."' AND estado = '0' order by fecha desc");
+          <?php $amistade = mysqli_query($connect, "SELECT * FROM amigos WHERE para = '".$_SESSION['id']."' AND estado = '0' order by fecha DESC");
              $contar = mysqli_num_rows($amistade);
 
               if($contar > 0) 
@@ -421,7 +375,6 @@ if(!isset($_SESSION['usuario']))
             <div class="box-header with-border">
               <h3 class="box-title">Solicitudes de amistad</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
               <ul class="products-list product-list-in-box">
 
@@ -437,27 +390,23 @@ if(!isset($_SESSION['usuario']))
                   </div>
                   <div class="product-info">
                   <?php echo $us['nombre']; ?>
-                      <a href="solicitud.php?action=aceptar&id=<?php echo $am['id_amigo']; ?>"><span class="label label-success pull-right">Aceptar</span></a>
+                      <a href="solicitud.php?action=aceptar&id=<?php echo $am['de']; ?>"><span class="label label-success pull-right">Aceptar</span></a>
                       <br>
-                      <a href="solicitud.php?action=rechazar&id=<?php echo $am['id_amigo']; ?>"><span class="label label-danger pull-right">Rechazar</span></a>
+                      <a href="solicitud.php?action=rechazar&id=<?php echo $am['de']; ?>"><span class="label label-danger pull-right">Rechazar</span></a>
                         <span class="product-description">
                           <?php echo $us['sexo']; ?>
                         </span>
                   </div>
                 </li>
-                <!-- /.item -->
 
                 <?php } ?>
 
 
               </ul>
             </div>
-            <!-- /.box-footer -->
           </div>
         <?php } ?>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
 
 
         <div class="col-md-4">
@@ -466,7 +415,6 @@ if(!isset($_SESSION['usuario']))
                 <div class="box-header with-border">
                   <h3 class="box-title">Nuevos en me<b>Paint</b></h3>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body no-padding">
                   <ul class="users-list clearfix">
                   <?php $registrados = mysqli_query($connect, "SELECT * FROM usuarios WHERE id_user!='".$_SESSION['id']."' order by id_user desc limit 8");
@@ -485,41 +433,24 @@ if(!isset($_SESSION['usuario']))
                   ?>
 
                   </ul>
-                  <!-- /.users-list -->
                 </div>
-                <!-- /.box-footer -->
               </div>
-              <!--/.box -->
             </div>
-            <!-- /.col -->
 
 
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 
       </div>
-      <!-- /.tab-pane -->
     </div>
   </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 
 </div>
-<!-- ./wrapper -->
 
-<!-- Bootstrap 3.3.6 -->
+<!-- Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
-<!-- Sparkline -->
-<!-- JS modificar diseño input file -->
-<script src="js/custom-file-input.js"></script>
 </body>
 </html>

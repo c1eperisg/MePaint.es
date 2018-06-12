@@ -13,14 +13,10 @@ if(!isset($_SESSION['usuario']))
 <?php
 if(isset($_GET['id'])) {
 
-$id = mysqli_real_escape_string($connect, $_GET['id']);
+	$id = mysqli_real_escape_string($connect, $_GET['id']);
 
-	$consulta=mysqli_query($connect, "SELECT id_user
-        FROM
-        usuarios WHERE id_user = '$id'");
-	$peticion=mysqli_fetch_array($consulta);
-
-	mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo = 'te ha etiquetado en una publicacion' AND de = '".$peticion['id_user']."' AND para = '".$_SESSION['id']."'");
+	//quitamos la notificacion
+	mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo = 'te ha etiquetado en una publicacion' AND leido = '0' AND de = $id AND para = '".$_SESSION['id']."'");
 
 	header("Location: perfil.php?id=".$_SESSION['id']."&perfil=etiquetado");
 

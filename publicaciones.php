@@ -24,7 +24,6 @@ include 'lib/config.php';
 
 	?>
 	<!-- START PUBLICACIONES -->
-          <!-- Box Comment -->
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
@@ -37,14 +36,11 @@ include 'lib/config.php';
                 <span class="description"><?php echo $lista['fecha'];?></span>
                 <span class="description">Subida por <span onclick="location.href='perfil.php?id=<?php echo $use['id_user'];?>';" style="cursor:pointer; color: #3C8DBC;"><?php echo $use['nombre'];?></span></span>
               </div>
-              <!-- /.user-block -->
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div>
-              <!-- /.box-tools -->
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
               <!-- Descripción publicación -->
               <p><?php echo $lista['contenido'];?></p>
@@ -54,25 +50,18 @@ include 'lib/config.php';
               if($lista['imagen'] != 0)
               {
               ?>
-              <img src="publicaciones/<?php echo $lista['imagen'];?>" width="50%">
+              <img style="max-width: 500px; max-height: 500px;" src="publicaciones/<?php echo $lista['imagen'];?>">
               <?php
           	  }
           	  ?>
 
             </div>
-            <!-- /.box-body -->
 
         </div>
-        <!-- /.col -->
         <!-- END PUBLICACIONES -->
     
     <br><br>
 
 	<?php
-	}
-	//Validmos el incrementador par que no genere error
-	//de consulta.  
-    if($IncrimentNum<=0){}else {
-	echo "<a href=\"publicaciones.php?pag=".$IncrimentNum."\">Seguiente</a>";
 	}
 ?>

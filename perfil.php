@@ -31,9 +31,8 @@ if(!isset($_SESSION['usuario']))
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo $use['nombre']; ?> | ME PAINT</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
+  <!-- Bootstrap  -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -41,17 +40,13 @@ if(!isset($_SESSION['usuario']))
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <!-- Estilos personalizados -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <!-- fav icon -->
   <link rel="icon" type="image/gif" href="images/fav_icon.png" />
-  
-    <!-- codigo scroll -->
+  <!-- Despliegue el minimenú -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="js/jquery.jscroll.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -62,11 +57,9 @@ if(!isset($_SESSION['usuario']))
 
     <!-- Logo -->
     <a href="index.php" class="logo">
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">ME<b>PAINT</b></span>
     </a>
 
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -78,7 +71,6 @@ if(!isset($_SESSION['usuario']))
           $cuantas = mysqli_num_rows($noti);
           ?>
 
-          <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -87,7 +79,6 @@ if(!isset($_SESSION['usuario']))
             <ul class="dropdown-menu">
               <li class="header">Tienes <?php echo $cuantas; ?> notificaciones</li>
               <li>
-                <!-- inner menu: contains the actual data -->
                 <ul class="menu">
 
                 <?php                
@@ -102,8 +93,9 @@ if(!isset($_SESSION['usuario']))
                     <?php if ($no['tipo'] == 'quiere ser tu amigo') { ?>
                         <i class="fa fa-users text-aqua"></i> <?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
                    <?php } else { ?>
-                    <span onclick="location.href='perfil.php?id=<?php echo $_SESSION['id'];?>&perfil=etiquetado';">
+                     <a href="check.php?id=<?php echo $usa['id_user']; ?>">
                       <i class="fa fa-users text-aqua"></i><?php echo $usa['nombre']; ?> <?php echo $no['tipo']; ?>
+                    </a>
                     </span>
                   <?php } ?>
                   </center>
@@ -117,7 +109,6 @@ if(!isset($_SESSION['usuario']))
             </ul>
           </li>
 
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="avatars/<?php echo $_SESSION['avatar']; ?>" class="user-image" alt="User Image">
@@ -152,11 +143,8 @@ if(!isset($_SESSION['usuario']))
 <!-- END HEADER -->
 
 <!-- START LEFT SIDE -->
-<!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="color: white;">
-      <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left">
           <img src="avatars/<?php echo $_SESSION['avatar']; ?>" width="50" alt="User Image">
@@ -228,16 +216,13 @@ if(!isset($_SESSION['usuario']))
 <!-- END LEFT SIDE -->
 
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-    <!-- Main content -->
     <section class="content">
 
       <div class="row">
         <div class="col-md-3">
 
-          <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive" src="avatars/<?php echo $use['avatar'];?>" alt="User profile picture">
@@ -251,18 +236,6 @@ if(!isset($_SESSION['usuario']))
                 <li class="list-group-item">
                   <b>Amigos</b> <a class="pull-right"><?php echo $totAmigos; ?></a>
                 </li>
-                <!--
-                Amigos en común, hay que seguir trabajandolo
-
-                <?php if ($_SESSION['id']!=$id) {
-                  $misAmigos = mysqli_query($connect, "SELECT * FROM usuarios INNER JOIN amigos ON usuarios.id_user = amigos.de AND amigos.para = $_SESSION[id] AND estado=1 OR usuarios.id_user = amigos.para AND amigos.de = $_SESSION[id] AND estado=1 order by usuarios.nombre");
-                  $totAmigosComun = mysqli_num_rows($misAmigos);
-                  ?>
-                  <li class="list-group-item">
-                  <b>Amigos en común</b> <a class="pull-right"><?php echo $totAmigosComun; ?></a>
-                </li>
-                <?php } ?>
-                -->
                 
               </ul>
               
@@ -305,9 +278,7 @@ if(!isset($_SESSION['usuario']))
               <br>
 
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
           <!-- USERS LIST -->
 
           
@@ -333,16 +304,11 @@ if(!isset($_SESSION['usuario']))
                   ?>
 
                   </ul>
-                  <!-- /.users-list -->
                 </div>
-                <!-- /.box-footer -->
               </div>
-              <!--/.box -->
-
 
         </div>
 
-        <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -351,8 +317,6 @@ if(!isset($_SESSION['usuario']))
             </ul>
             <div class="tab-content">
 
-                
-          <!-- codigo scroll -->
           <div class="scroll">
 
 
@@ -374,32 +338,23 @@ if(!isset($_SESSION['usuario']))
               </div>
   
           </div>
-          <!-- /.nav-tabs-custom -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
 
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
-<!-- Bootstrap 3.3.6 -->
+<!-- Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
 <?php
 
-} // finaliza if GET
+}
 ?>

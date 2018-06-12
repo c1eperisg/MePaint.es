@@ -13,32 +13,27 @@ if(!isset($_SESSION['usuario']))
 <?php
 if(isset($_GET['id'])) {
 
-$id = mysqli_real_escape_string($connect, $_GET['id']);
-$action = mysqli_real_escape_string($connect, $_GET['action']);
-
-	$consulta=mysqli_query($connect, "SELECT id_user
-        FROM
-        usuarios INNER JOIN amigos ON usuarios.id_user = amigos.de AND amigos.id_amigo = '$id'");
-	$peticion=mysqli_fetch_array($consulta);
-
-if($action == 'aceptar') {
-
-	$update = mysqli_query($connect, "UPDATE amigos SET estado = '1' WHERE id_amigo = '$id'");
-	mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo='quiere ser tu amigo' AND de = '".$peticion['id_user']."' AND para = '".$_SESSION['id']."'");
-	header('Location:' . getenv('HTTP_REFERER'));
+	$id = mysqli_real_escape_string($connect, $_GET['id']);
+	$action = mysqli_real_escape_string($connect, $_GET['action']);
 
 
-}
+	if($action == 'aceptar') {
+		//aceptamos la peticion
+		mysqli_query($connect, "UPDATE amigos SET estado = '1' WHERE de = '$id' AND para = '".$_SESSION['id']."'");
+		//quitamos la notificacion
+		mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo = 'quiere ser tu amigo' AND leido = '0' AND de = $id AND para = '".$_SESSION['id']."'");
+		header('Location:' . getenv('HTTP_REFERER'));
 
-if($action == 'rechazar') {
+	}
 
-	$delete = mysqli_query($connect, "DELETE FROM amigos WHERE id_amigo = '$id'");
-	mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo='quiere ser tu amigo' AND de = '$id' AND para = '".$_SESSION['id']."'");
-	header('Location:' . getenv('HTTP_REFERER'));
+	if($action == 'rechazar') {
+		//rechazamos la petición
+		mysqli_query($connect, "DELETE FROM amigos WHERE de = '$id' AND para = '".$_SESSION['id']."'");
+		//quitamos la notificacion
+		mysqli_query($connect, "UPDATE notificaciones SET leido = '1' WHERE tipo='quiere ser tu amigo' AND leido = '0' AND de = $id AND para = '".$_SESSION['id']."'");
+		header('Location:' . getenv('HTTP_REFERER'));
 
-}
-
-
+	}
 
 }
 

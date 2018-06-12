@@ -1,10 +1,7 @@
 <?php 
 $id = mysqli_real_escape_string($connect, $_GET['id']);
-$consultasEtiquetado ="SELECT *
-        FROM
-        publicaciones WHERE usuario = $id
-        ORDER BY
-        id_pub";
+$consultasEtiquetado ="SELECT * FROM publicaciones WHERE usuario = $id ORDER BY id_pub DESC";
+/* Mostrará primeor las publicaciones más recientes */
     $consultaEt=mysqli_query($connect, $consultasEtiquetado);
     while ($listaEt=mysqli_fetch_array($consultaEt)) {
 
@@ -21,7 +18,6 @@ $consultasEtiquetado ="SELECT *
 
         ?>
     <!-- START PUBLICACIONES -->
-          <!-- Box Comment -->
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
@@ -34,14 +30,11 @@ $consultasEtiquetado ="SELECT *
                 <span class="description"><?php echo $fechaEt;?></span>
                 <span class="description">Subida por <?php echo $useb['nombre'];?></span>
               </div>
-              <!-- /.user-block -->
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
               </div>
-              <!-- /.box-tools -->
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
               <!-- Descripción publicación -->
               <p><?php echo $contenidoEt;?></p>
@@ -51,16 +44,14 @@ $consultasEtiquetado ="SELECT *
               if($listaEt['imagen'] != 0)
               {
               ?>
-              <img src="publicaciones/<?php echo $listaEt['imagen'];?>" width="50%">
+              <img style="max-width: 500px; max-height: 500px;" src="publicaciones/<?php echo $listaEt['imagen'];?>">
               <?php
               }
               ?>
 
             </div>
-            <!-- /.box-body -->
 
         </div>
-        <!-- /.col -->
         <!-- END PUBLICACIONES -->
         <?php 
         } ?>
